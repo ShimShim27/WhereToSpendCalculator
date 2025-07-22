@@ -23,7 +23,8 @@ public class DefaultWallet implements Calculator {
     }
 
     @Override
-    public List<WalletResult> getWalletsOrderedByExpensiveness(boolean asc, List<Wallet> wallets) {
+    public List<WalletResult> getWalletsOrderedByExpensiveness(List<Wallet> wallets, boolean asc) {
         return null;
     }
+
 }
