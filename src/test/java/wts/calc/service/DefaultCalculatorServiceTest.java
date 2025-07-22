@@ -3,7 +3,9 @@ package wts.calc.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import wts.calc.service.DefaultCalculatorService;
+import wts.calc.data.Wallet;
+
+import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,7 +21,10 @@ public class DefaultCalculatorServiceTest {
     @Test
     @DisplayName("Get cheapest wallet")
     public void getCheapestWallet_ShouldReturn_CheapestWallet() {
-       assertTrue(false);
+        final BigDecimal spendAmount = new BigDecimal("1000");
+
+        final Wallet wallet1 = new Wallet();
+//        wallet1.setBalance();
     }
 
     @Test
@@ -28,24 +33,21 @@ public class DefaultCalculatorServiceTest {
         assertTrue(false);
     }
 
-
     @Test
-    @DisplayName("Get most cheapest wallet combination")
-    public void getCheapestWalletCombination_ShouldReturn_CheapestWalletCombination() {
+    @DisplayName("Get wallet in order by expensiveness")
+    public void getWalletsOrderedByExpensiveness_ShouldReturn_WalletsOrderedByExpensiveness(){
         assertTrue(false);
     }
 
-
     @Test
-    @DisplayName("Get wallet in ascending order by expensiveness")
-    public void getWalletsOrderedByExpensivenessInAsc_ShouldReturn_WalletsOrderedByExpensivenessInAsc(){
+    @DisplayName("Process no name wallets")
+    public void ProcessWalletWithNoName_ShouldThrow_Exception() {
         assertTrue(false);
     }
 
-
     @Test
-    @DisplayName("Get wallet in descending order by expensiveness")
-    public void getWalletsOrderedByExpensivenessInDesc_ShouldReturn_WalletsOrderedByExpensivenessInDesc(){
-        assertTrue(false, "testicle");
+    @DisplayName("Process empty wallet list")
+    public void ProcessEmptyWalletList_ShouldThrow_Exception() {
+        assertTrue(false);
     }
 }
