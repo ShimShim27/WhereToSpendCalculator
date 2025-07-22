@@ -5,7 +5,7 @@ import wts.calc.data.WalletResult;
 
 import java.util.List;
 
-public interface Calculator {
+public interface CalculatorService {
      public WalletResult getCheapestWallet(final List<Wallet> wallets);
      public WalletResult getMostExpensiveWallet(final List<Wallet> wallets);
      public List<WalletResult> getCheapestWalletCombinations(final List<Wallet> wallets);

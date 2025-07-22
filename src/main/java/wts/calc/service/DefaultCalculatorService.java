@@ -1,12 +1,12 @@
-package wts.calc.impl.service;
+package wts.calc.service;
 
-import wts.calc.base.service.Calculator;
+import wts.calc.base.service.CalculatorService;
 import wts.calc.data.Wallet;
 import wts.calc.data.WalletResult;
 
 import java.util.List;
 
-public class DefaultWallet implements Calculator {
+public class DefaultCalculatorService implements CalculatorService {
     @Override
     public WalletResult getCheapestWallet(List<Wallet> wallets) {
         return null;
