@@ -83,4 +83,15 @@ public class WalletUtilTest {
         assertEquals(CalculationUtil.stringToNumerical("1510.42"), cashback4, "Cashback is equal to the remaining cashback");
 
     }
+
+    @Test
+    @DisplayName("Calculate after fee amount")
+    public void CalculateAfterFeeAmount_ShouldReturn_AmountAfterDeductions() {
+        assertEquals(CalculationUtil.stringToNumerical("1790.50"),
+                WalletUtil.calculateAfterFeeAmount(CalculationUtil.stringToNumerical("1822.44"), CalculationUtil.stringToNumerical("31.94")));
+
+
+        assertEquals(CalculationUtil.stringToNumerical("-409.50"),
+                WalletUtil.calculateAfterFeeAmount(CalculationUtil.stringToNumerical("1822.44"), CalculationUtil.stringToNumerical("2231.94")));
+    }
 }

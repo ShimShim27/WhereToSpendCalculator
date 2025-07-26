@@ -15,9 +15,6 @@ public class WalletUtil {
         return new ArrayList<>();
     }
 
-
-
-
     public static BigDecimal calculateInterestAndGetNewTotal(final BigDecimal principal, final BigDecimal ratePercentage, final int compoundedFrequency, final int timePeriod) {
         final BigDecimal convertedRate = CalculationUtil.percentToDecimal(ratePercentage);
         final BigDecimal a = BigDecimal.ONE.add(convertedRate.divide(new BigDecimal(compoundedFrequency), CalculationUtil.DEFAULT_ACCURACY_SCALE, CalculationUtil.DEFAULT_ROUNDING_MODE));
@@ -37,6 +34,10 @@ public class WalletUtil {
        }
 
         return toMonetaryFormat(cashback);
+    }
+
+    public static BigDecimal calculateAfterFeeAmount(final BigDecimal principal, final BigDecimal fee) {
+        return toMonetaryFormat(principal.subtract(fee));
     }
 
     private static BigDecimal toMonetaryFormat(final BigDecimal bigDecimal){

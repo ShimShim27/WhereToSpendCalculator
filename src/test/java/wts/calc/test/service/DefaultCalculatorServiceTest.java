@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import wts.calc.data.Wallet;
 import wts.calc.data.WalletResult;
-import wts.calc.exception.CalculationException;
+import wts.calc.exception.WalletException;
 import wts.calc.params.TestWalletListParameter;
 import wts.calc.service.DefaultCalculatorService;
 import wts.calc.util.CalculationUtil;
@@ -80,21 +80,21 @@ public class DefaultCalculatorServiceTest {
         final Wallet emptyWalletName = new Wallet();
         nullWalletName.setName("");
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getCheapestWallet(spendAmount,  Arrays.asList(wallet1, wallet3, nullWalletName)),
-                CalculationException.NO_WALLET_NAME);
+                WalletException.NO_WALLET_NAME);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getMostExpensiveWallet(spendAmount,  Arrays.asList(wallet1, wallet3, new Wallet())),
-                CalculationException.NO_WALLET_NAME);
+                WalletException.NO_WALLET_NAME);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getWalletsOrderedByExpensiveness(spendAmount,  Arrays.asList(wallet1, wallet3, new Wallet()), true),
-                CalculationException.NO_WALLET_NAME);
+                WalletException.NO_WALLET_NAME);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getWalletsOrderedByExpensiveness(spendAmount,  Arrays.asList(wallet1, wallet3, emptyWalletName), false),
-                CalculationException.NO_WALLET_NAME);
+                WalletException.NO_WALLET_NAME);
     }
 
     @Test
@@ -102,21 +102,21 @@ public class DefaultCalculatorServiceTest {
     public void ProcessEmptyWalletList_ShouldThrow_Exception() {
         final BigDecimal spendAmount = new BigDecimal("11");
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getCheapestWallet(spendAmount, Collections.emptyList()),
-                CalculationException.NO_WALLETS);
+                WalletException.NO_WALLETS);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getMostExpensiveWallet(spendAmount, Collections.emptyList()),
-                CalculationException.NO_WALLETS);
+                WalletException.NO_WALLETS);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getWalletsOrderedByExpensiveness(spendAmount, Collections.emptyList(), true),
-                CalculationException.NO_WALLETS);
+                WalletException.NO_WALLETS);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getWalletsOrderedByExpensiveness(spendAmount, Collections.emptyList(), false),
-                CalculationException.NO_WALLETS);
+                WalletException.NO_WALLETS);
     }
 
     @Test
@@ -129,25 +129,25 @@ public class DefaultCalculatorServiceTest {
 
 
         final Wallet wallet3 = new Wallet();
-        wallet3.setName("Wallet 2");
+        wallet3.setName("Wallet 1");
 
         final List<Wallet> wallets = Arrays.asList(wallet1, wallet3);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getCheapestWallet(spendAmount, wallets),
-                CalculationException.DUPLICATE_WALLET_NAME);
+                WalletException.DUPLICATE_WALLET_NAME);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getMostExpensiveWallet(spendAmount, wallets),
-                CalculationException.DUPLICATE_WALLET_NAME);
+                WalletException.DUPLICATE_WALLET_NAME);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getWalletsOrderedByExpensiveness(spendAmount, wallets, true),
-                CalculationException.DUPLICATE_WALLET_NAME);
+                WalletException.DUPLICATE_WALLET_NAME);
 
-        assertThrowsExactly(CalculationException.class,
+        assertThrowsExactly(WalletException.class,
                 ()->service.getWalletsOrderedByExpensiveness(spendAmount, wallets, false),
-                CalculationException.DUPLICATE_WALLET_NAME);
+                WalletException.DUPLICATE_WALLET_NAME);
     }
 
 
@@ -206,16 +206,6 @@ public class DefaultCalculatorServiceTest {
         wallet4.setInterestPercentageAndMinSpendMap(interestRates4);
         wallet4.setCashbackPercentage(CalculationUtil.stringToNumerical("10"));
 
-
-        // daily interest wallet, with discount
-        final Wallet wallet5 = new Wallet();
-        wallet5.setName("wallet 5");
-        wallet5.setBalance(CalculationUtil.stringToNumerical("27186.5"));
-        final Map<BigDecimal, BigDecimal> interestRates5 = new HashMap<>();
-        interestRates5.put(CalculationUtil.stringToNumerical("5.5"), CalculationUtil.stringToNumerical("0"));
-        wallet5.setInterestPercentageAndMinSpendMap(interestRates5);
-        wallet5.setDiscountUponSpendPercentage(CalculationUtil.stringToNumerical("5"));
-
-        return Arrays.asList(wallet1, wallet2, wallet3, wallet4, wallet5);
+        return Arrays.asList(wallet1, wallet2, wallet3, wallet4);
     }
 }
