@@ -1,4 +1,4 @@
-package wts.calc.factory;
+package wts.calc.test.factory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

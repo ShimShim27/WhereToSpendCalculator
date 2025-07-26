@@ -1,23 +1,22 @@
 package wts.calc.data;
 
 import lombok.Data;
-import wts.calc.util.WalletUtil;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@EqualsAndHashCode
 public class Wallet {
     private String name;
-    private BigDecimal balance = WalletUtil.getZeroBalance();
-    private Map<BigDecimal, BigDecimal> monthlyInterestRatesAndMinimumSpendMap = new HashMap<>();
-    private BigDecimal alreadySpent = WalletUtil.getZeroBalance();
+    private BigDecimal balance = BigDecimal.ZERO;
+    private Map<BigDecimal, BigDecimal> interestPercentageAndMinSpendMap = new HashMap<>();
+    private BigDecimal alreadySpent = BigDecimal.ZERO;
     private boolean isCompoundedDaily;
-    private BigDecimal minAmtForCashback = WalletUtil.getZeroBalance();
-    private BigDecimal maxCashback = WalletUtil.getZeroBalance();
-    private BigDecimal cashbackPercentage = WalletUtil.getZeroBalance();
-    private BigDecimal alreadyCashedBack = WalletUtil.getZeroBalance();
-    private BigDecimal discountUponSpend = WalletUtil.getZeroBalance();
-    private BigDecimal spendingFee = WalletUtil.getZeroBalance();
+    private BigDecimal maxCashback = BigDecimal.ZERO;
+    private BigDecimal cashbackPercentage = BigDecimal.ZERO;
+    private BigDecimal alreadyCashedBack = BigDecimal.ZERO;
+    private BigDecimal spendingFee = BigDecimal.ZERO;
 }
