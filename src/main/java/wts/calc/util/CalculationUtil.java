@@ -27,4 +27,8 @@ public class CalculationUtil {
     public static boolean isGreaterThan(final BigDecimal b1, final BigDecimal b2) {
         return b1.compareTo(b2) > 0;
     }
+
+    public static boolean isLessThan(final BigDecimal b1, final BigDecimal b2) {
+        return b1.compareTo(b2) < 0;
+    }
 }

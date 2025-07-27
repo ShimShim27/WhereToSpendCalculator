@@ -32,17 +32,19 @@ public class DefaultCalculatorServiceTest {
     @MethodSource("testWallets")
     @DisplayName("Get cheapest wallet")
     public void getCheapestWallet_ShouldReturn_CheapestWallet(final TestWalletListParameter params) {
-        assertEquals(service.getCheapestWallet(params.getSpendAmount(),
-                        params.getWallets()),
-                params.getProcessedWalletsOrderByCheapest().get(0));
+        setServiceDate();
+        assertEquals( params.getProcessedWalletsOrderByCheapest().get(0),
+                service.getCheapestWallet(params.getSpendAmount(),
+                        params.getWallets()));
     }
 
     @ParameterizedTest
     @MethodSource("testWallets")
     @DisplayName("Get most expensive wallet")
-    public void getMostExpensiveWallet_ShouldReturn_MostWallet(final TestWalletListParameter params) {
+    public void getMostExpensiveWallet_ShouldReturn_MostExpensiveWallet(final TestWalletListParameter params) {
+        setServiceDate();
         final List<WalletResult> results =  params.getProcessedWalletsOrderByCheapest();
-        assertEquals(service.getCheapestWallet(params.getSpendAmount(),
+        assertEquals(service.getMostExpensiveWallet(params.getSpendAmount(),
                         params.getWallets()), results.get(results.size()-1)
                );
     }
@@ -51,13 +53,22 @@ public class DefaultCalculatorServiceTest {
     @MethodSource("testWallets")
     @DisplayName("Get wallet in order by expensiveness")
     public void getWalletsOrderedByExpensiveness_ShouldReturn_WalletsOrderedByExpensiveness(final TestWalletListParameter params){
+        setServiceDate();
+
         final List<WalletResult> results =  params.getProcessedWalletsOrderByCheapest();
-        assertEquals(service.getWalletsOrderedByExpensiveness(params.getSpendAmount(),
-                params.getWallets(), true), results, "Ascending order");
+        final List<WalletResult> orderedByCheapest = service.getWalletsOrderedByExpensiveness(params.getSpendAmount(),
+        params.getWallets(), true);
+        for (int i=0; i<results.size(); i++) {
+            assertEquals(results.get(i),orderedByCheapest.get(i), String.format("Ascending order data: %s", i));
+        }
+
 
         Collections.reverse(results);
-        assertEquals(service.getWalletsOrderedByExpensiveness(params.getSpendAmount(),
-                params.getWallets(), false), results, "Descending order");
+        final List<WalletResult> orderedByExpensiveness = service.getWalletsOrderedByExpensiveness(params.getSpendAmount(),
+                params.getWallets(), false);
+        for (int i=0; i<results.size(); i++) {
+            assertEquals(results.get(i),orderedByExpensiveness.get(i), "Descending order");
+        }
     }
 
     @Test
@@ -150,16 +161,32 @@ public class DefaultCalculatorServiceTest {
                 WalletException.DUPLICATE_WALLET_NAME);
     }
 
+    private void setServiceDate() {
+        //19 days
+        final GregorianCalendar gStart =  new GregorianCalendar();
+        gStart.set(2025, GregorianCalendar.JULY, 12, 0, 0, 0);
+        service.setStartDate(gStart.getTime());
+    }
 
     private static Stream<TestWalletListParameter> testWallets() {
         final List<Wallet> w1 = wallets1();
+        final List<WalletResult> r1 = Arrays.asList(
+
+                new WalletResult(w1.get(1), CalculationUtil.stringToNumerical("1000.00"), CalculationUtil.stringToNumerical("49160.10")),
+                new WalletResult(w1.get(0), CalculationUtil.stringToNumerical("1000.00"), CalculationUtil.stringToNumerical("49000.00")),
+                new WalletResult(w1.get(2), CalculationUtil.stringToNumerical("1075.22"), CalculationUtil.stringToNumerical("38714.78")),
+                new WalletResult(w1.get(3), CalculationUtil.stringToNumerical("900.00"), CalculationUtil.stringToNumerical("36294.35"))
+
+        );
+
+
         final TestWalletListParameter p1 = new TestWalletListParameter(
-                w1,
-                Arrays.asList(),
+                w1, r1,
                 CalculationUtil.stringToNumerical("1000")
         );
         return Stream.of(p1);
     }
+
 
     private static List<Wallet> wallets1(){
         //fiat
@@ -191,8 +218,8 @@ public class DefaultCalculatorServiceTest {
         wallet3.setCompoundedDaily(true);
         final Map<BigDecimal, BigDecimal> interestRates3 = new HashMap<>();
         interestRates3.put(CalculationUtil.stringToNumerical("8"), CalculationUtil.stringToNumerical("1000"));
-        interestRates3.put(CalculationUtil.stringToNumerical("15.25"), CalculationUtil.stringToNumerical("1200"));
         interestRates3.put(CalculationUtil.stringToNumerical("17.75"), CalculationUtil.stringToNumerical("1300"));
+        interestRates3.put(CalculationUtil.stringToNumerical("15.25"), CalculationUtil.stringToNumerical("1200"));
         wallet3.setInterestPercentageAndMinSpendMap(interestRates3);
         wallet3.setSpendingFee(CalculationUtil.stringToNumerical("75.22"));
 
