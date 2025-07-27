@@ -1,47 +1,45 @@
 [
+
   {
-    "name": "Wallet 1",
+
+    "name": "Paymaya",
+
     "balance": "231.22",
+
     "alreadySpent": "321.25",
+
     "isCompoundedDaily": "true",
+
     "maxCashback": "1944.55",
+
     "cashbackPercentage": "19.4",
+
     "alreadyCashedBack": "5",
+
     "spendingFee": "20.5",
+
     "interestPercentageAndMinSpendMap": {
+
       "1.5": "18.3"
+
     }
+
   },
+
   {
-    "name": "Wallet 2",
+
+    "name": "Shopee",
+
     "isCompoundedDaily": "true",
+
     "maxCashback": "1944.55",
+
     "cashbackPercentage": "19.4",
+
     "alreadyCashedBack": "5",
+
     "spendingFee": "20.5"
-  },
-  {
-    "name": "Shapep",
-    "balance": "162.5",
-    "alreadySpent": "1.25",
-    "alreadyCashedBack": "5",
-    "spendingFee": "20.5",
-    "interestPercentageAndMinSpendMap": {
-      "1.5": "18.3"
-    }
-  },
-  {
-    "name": "Wallet 99",
-    "balance": "231.22",
-    "alreadySpent": "321.25",
-    "isCompoundedDaily": "true",
-    "maxCashback": "1944.55",
-    "cashbackPercentage": "19.4",
-    "alreadyCashedBack": "5",
-    "spendingFee": "20.5",
-    "interestPercentageAndMinSpendMap": {
-      "1.9": "18.3",
-      "12.5": "18.44"
-    }
+
   }
+
 ]
