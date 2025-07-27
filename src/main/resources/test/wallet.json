@@ -1,0 +1,45 @@
+[
+
+  {
+
+    "name": "Paymaya",
+
+    "balance": "231.22",
+
+    "alreadySpent": "321.25",
+
+    "isCompoundedDaily": "true",
+
+    "maxCashback": "1944.55",
+
+    "cashbackPercentage": "19.4",
+
+    "alreadyCashedBack": "5",
+
+    "spendingFee": "20.5",
+
+    "interestPercentageAndMinSpendMap": {
+
+      "1.5": "18.3"
+
+    }
+
+  },
+
+  {
+
+    "name": "Shopee",
+
+    "isCompoundedDaily": "true",
+
+    "maxCashback": "1944.55",
+
+    "cashbackPercentage": "19.4",
+
+    "alreadyCashedBack": "5",
+
+    "spendingFee": "20.5"
+
+  }
+
+]
