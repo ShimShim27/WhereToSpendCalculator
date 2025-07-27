@@ -9,5 +9,5 @@ import java.util.List;
 public interface CalculatorService {
      public WalletResult getCheapestWallet(final BigDecimal spendAmount, final List<Wallet> wallets);
      public WalletResult getMostExpensiveWallet(final BigDecimal spendAmount, final List<Wallet> wallets);
-     public List<WalletResult> getWalletsOrderedByExpensiveness(final BigDecimal spendAmount, final List<Wallet> wallets, final boolean asc);
+     public List<WalletResult> getWalletsOrderedByExpensiveness(final BigDecimal spendAmount, final List<Wallet> wallets, final boolean sortByCheapest);
 }

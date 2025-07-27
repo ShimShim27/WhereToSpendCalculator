@@ -92,7 +92,7 @@ public class DefaultCalculatorService implements CalculatorService {
         endCalendar.set(Calendar.SECOND,0);
         endCalendar.set(Calendar.MILLISECOND, 0);
 
-        return BigDecimal.valueOf(endCalendar.get(Calendar.DAY_OF_MONTH) - startCalendar.get(Calendar.DAY_OF_MONTH) - 1)
+        return BigDecimal.valueOf(endCalendar.get(Calendar.DAY_OF_MONTH) - startCalendar.get(Calendar.DAY_OF_MONTH))
                 .divide(BigDecimal.valueOf(COMPOUND_FREQUENCY), CalculationUtil.DEFAULT_ACCURACY_SCALE, CalculationUtil.DEFAULT_ROUNDING_MODE);
     }
 

@@ -162,16 +162,15 @@ public class DefaultCalculatorServiceTest {
     }
 
     private void setServiceDate() {
-        //19 days
+        //18 days
         final GregorianCalendar gStart =  new GregorianCalendar();
-        gStart.set(2025, GregorianCalendar.JULY, 12, 0, 0, 0);
+        gStart.set(2025, GregorianCalendar.JULY, 13, 0, 0, 0);
         service.setStartDate(gStart.getTime());
     }
 
     private static Stream<TestWalletListParameter> testWallets() {
         final List<Wallet> w1 = wallets1();
         final List<WalletResult> r1 = Arrays.asList(
-
                 new WalletResult(w1.get(1), CalculationUtil.stringToNumerical("1000.00"), CalculationUtil.stringToNumerical("49160.10")),
                 new WalletResult(w1.get(0), CalculationUtil.stringToNumerical("1000.00"), CalculationUtil.stringToNumerical("49000.00")),
                 new WalletResult(w1.get(2), CalculationUtil.stringToNumerical("1075.22"), CalculationUtil.stringToNumerical("38714.78")),
